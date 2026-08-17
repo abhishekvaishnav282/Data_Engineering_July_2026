@@ -24,5 +24,5 @@ Thumbs.db
 .streamlit/secrets.toml
 
 # --- Large datasets (download separately, see each project's README) ---
-Python/Streamlit-Dashboards/Home-Credit-Dashboard/data/application_train.csv
+Python/Home-Credit-Dashboard/data/application_train.csv
 *.zip
