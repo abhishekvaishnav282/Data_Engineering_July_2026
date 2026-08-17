@@ -1,0 +1,28 @@
+# --- Python junk ---
+__pycache__/
+*.py[cod]
+*.pyo
+.ipynb_checkpoints/
+*.egg-info/
+build/
+dist/
+
+# --- Virtual environments ---
+venv/
+.venv/
+env/
+ENV/
+
+# --- OS / editor junk ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+~$*
+
+# --- Streamlit ---
+.streamlit/secrets.toml
+
+# --- Large datasets (download separately, see each project's README) ---
+Python/Streamlit-Dashboards/Home-Credit-Dashboard/data/application_train.csv
+*.zip
