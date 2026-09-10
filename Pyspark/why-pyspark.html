@@ -1,0 +1,419 @@
+<title>Why PySpark?</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --bg:#F4F6F7;
+    --surface:#FFFFFF;
+    --surface-2:#EEF2F3;
+    --ink:#12202B;
+    --ink-soft:#52646E;
+    --line:#D7E0E3;
+    --accent-single:#B5762A;
+    --accent-single-soft:#F3E6D3;
+    --accent-cluster:#157A8C;
+    --accent-cluster-soft:#DCEFF2;
+    --code-bg:#0F1E26;
+    --code-ink:#DCE8EA;
+    --code-comment:#7C97A0;
+    --shadow: 0 1px 2px rgba(18,32,43,0.06), 0 8px 24px rgba(18,32,43,0.05);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0E1B22;
+      --surface:#14262F;
+      --surface-2:#182C36;
+      --ink:#E7EEF0;
+      --ink-soft:#9FB4BC;
+      --line:#24404A;
+      --accent-single:#E0A257;
+      --accent-single-soft:rgba(224,162,87,0.14);
+      --accent-cluster:#5BCADF;
+      --accent-cluster-soft:rgba(91,202,223,0.14);
+      --code-bg:#0A1519;
+      --code-ink:#DCE8EA;
+      --code-comment:#5F7981;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.25);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0E1B22;
+    --surface:#14262F;
+    --surface-2:#182C36;
+    --ink:#E7EEF0;
+    --ink-soft:#9FB4BC;
+    --line:#24404A;
+    --accent-single:#E0A257;
+    --accent-single-soft:rgba(224,162,87,0.14);
+    --accent-cluster:#5BCADF;
+    --accent-cluster-soft:rgba(91,202,223,0.14);
+    --code-bg:#0A1519;
+    --code-ink:#DCE8EA;
+    --code-comment:#5F7981;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.25);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"IBM Plex Sans", system-ui, sans-serif;
+    font-size:16px; line-height:1.6;
+  }
+  ::selection{ background:var(--accent-cluster-soft); }
+
+  .page{ max-width:860px; margin:0 auto; padding:64px 24px 96px; }
+
+  h1,h2,h3{ font-family:"Fraunces", Georgia, serif; text-wrap:balance; letter-spacing:-0.01em; }
+  .eyebrow{
+    font-family:"IBM Plex Mono", monospace; font-size:12.5px; font-weight:500;
+    letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-soft);
+    margin:0 0 14px;
+  }
+  h1{ font-size:clamp(34px,5vw,50px); font-weight:600; margin:0 0 18px; line-height:1.08; }
+  .lede{ font-size:19px; color:var(--ink-soft); max-width:62ch; margin:0; }
+  .lede code{ color:var(--ink); }
+
+  section{ margin-top:72px; }
+  h2{ font-size:26px; font-weight:600; margin:0 0 6px; }
+  h2 .num{ color:var(--accent-cluster); font-family:"IBM Plex Mono",monospace; font-size:16px; font-weight:600; margin-right:10px; vertical-align:2px; }
+  .section-sub{ color:var(--ink-soft); font-size:15px; margin:0 0 24px; max-width:64ch; }
+
+  p{ max-width:70ch; }
+  p + p{ margin-top:14px; }
+
+  code, .mono{ font-family:"IBM Plex Mono", monospace; }
+  :not(pre) > code{
+    background:var(--surface-2); border:1px solid var(--line); border-radius:4px;
+    padding:0.1em 0.4em; font-size:0.9em;
+  }
+
+  /* ---- diagrams ---- */
+  figure{ margin:28px 0 0; }
+  .diagram-wrap{
+    background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    padding:18px 20px 12px; box-shadow:var(--shadow); overflow-x:auto;
+  }
+  svg.diagram{ display:block; width:100%; height:auto; min-width:560px; color:var(--ink); }
+  figcaption{ font-size:14px; color:var(--ink-soft); margin-top:12px; max-width:70ch; }
+
+  /* ---- comparison table ---- */
+  .table-wrap{ overflow-x:auto; margin-top:26px; border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); }
+  table{ border-collapse:collapse; width:100%; min-width:760px; background:var(--surface); }
+  th, td{ text-align:left; padding:13px 16px; border-bottom:1px solid var(--line); vertical-align:top; font-size:14.5px; }
+  thead th{
+    font-family:"IBM Plex Mono", monospace; font-size:11.5px; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--ink-soft); font-weight:600; background:var(--surface-2); border-bottom:1px solid var(--line);
+  }
+  tbody tr:last-child td{ border-bottom:none; }
+  td.tool{ font-family:"IBM Plex Mono", monospace; font-weight:600; white-space:nowrap; }
+  tr[data-row="pyspark"] td{ background:var(--accent-cluster-soft); }
+  tr[data-row="pandas"] td{ background:var(--accent-single-soft); }
+
+  /* ---- code panels ---- */
+  .snippets{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; margin-top:24px; }
+  .snippet{ background:var(--code-bg); border-radius:12px; overflow:hidden; box-shadow:var(--shadow); }
+  .snippet-head{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:10px 16px; border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .snippet-head .name{ font-family:"IBM Plex Mono",monospace; font-size:12.5px; font-weight:600; color:#DCE8EA; letter-spacing:0.02em; }
+  .snippet-head .tag{ font-family:"IBM Plex Mono",monospace; font-size:10.5px; padding:2px 8px; border-radius:20px; letter-spacing:0.04em; }
+  .tag.recommended{ background:var(--accent-cluster); color:#04222A; }
+  .tag.plain{ background:rgba(255,255,255,0.1); color:#B9C9CD; }
+  pre{ margin:0; padding:16px; font-family:"IBM Plex Mono", monospace; font-size:13px; line-height:1.65; color:var(--code-ink); overflow-x:auto; }
+  .cm{ color:var(--code-comment); }
+  .snippet.wide{ grid-column:1 / -1; }
+
+  /* ---- decision list ---- */
+  ul.decide{ list-style:none; margin:24px 0 0; padding:0; display:flex; flex-direction:column; gap:14px; }
+  ul.decide li{
+    background:var(--surface); border:1px solid var(--line); border-radius:10px;
+    padding:14px 18px; display:flex; gap:14px; align-items:baseline; box-shadow:var(--shadow);
+  }
+  ul.decide li strong{ font-family:"IBM Plex Mono",monospace; font-size:13px; color:var(--accent-cluster); white-space:nowrap; }
+
+  .callout{
+    margin-top:28px; padding:20px 22px; border-radius:12px; background:var(--surface);
+    border:1px solid var(--line); border-left:4px solid var(--accent-single); box-shadow:var(--shadow);
+  }
+  .callout p{ margin:0; }
+  .callout p + p{ margin-top:10px; }
+
+  footer{ margin-top:80px; padding-top:24px; border-top:1px solid var(--line); color:var(--ink-soft); font-size:13.5px; }
+
+  @media (max-width:600px){
+    .page{ padding:48px 18px 72px; }
+    section{ margin-top:56px; }
+  }
+</style>
+
+<div class="page">
+
+  <p class="eyebrow">PySpark assignment — architecture notes</p>
+  <h1>Why PySpark?</h1>
+  <p class="lede">
+    You asked the right question: on a 50,000&#8209;row file, <code>pandas</code> could compute
+    <code>gross_amount</code>, <code>discount_amount</code> and <code>final_amount</code> just fine —
+    probably faster than Spark. Here's what actually changes underneath each approach,
+    using your <code>sales_100mb.csv</code> task as the running example.
+  </p>
+
+  <section id="architecture">
+    <h2><span class="num">01</span>Where the data actually sits</h2>
+    <p class="section-sub">Pandas and NumPy live inside one process. PySpark splits your file across a driver and several executors before it runs a single line.</p>
+
+    <figure>
+      <div class="diagram-wrap">
+        <svg class="diagram" viewBox="0 0 680 300" role="img" aria-label="Pandas keeps all 50,000 rows in one process's memory and runs on one core. PySpark splits the same file into partitions handled by separate executors, coordinated by a driver.">
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+            </marker>
+          </defs>
+
+          <!-- LEFT: single machine -->
+          <text x="175" y="24" text-anchor="middle" font-size="13.5" font-weight="600" fill="currentColor">Single machine — pandas / NumPy</text>
+          <rect x="30" y="42" width="290" height="222" rx="10" fill="none" stroke="currentColor" stroke-width="1.3" opacity="0.35"/>
+
+          <rect x="55" y="66" width="240" height="62" rx="6" fill="var(--accent-single-soft)" stroke="var(--accent-single)" stroke-width="1.5"/>
+          <text x="175" y="93" text-anchor="middle" font-size="12" font-family="'IBM Plex Mono',monospace" fill="currentColor">sales_100mb.csv</text>
+          <text x="175" y="111" text-anchor="middle" font-size="10.5" fill="currentColor" opacity="0.65">all 50,000 rows, one block in RAM</text>
+
+          <line x1="175" y1="128" x2="175" y2="156" stroke="currentColor" stroke-width="1.4" marker-end="url(#arrow)"/>
+          <text x="183" y="146" font-size="10" fill="currentColor" opacity="0.6">read once</text>
+
+          <rect x="55" y="156" width="240" height="58" rx="6" fill="none" stroke="currentColor" stroke-width="1.4"/>
+          <text x="175" y="180" text-anchor="middle" font-size="11.5" font-family="'IBM Plex Mono',monospace" fill="currentColor">df['gross_amount'] = ...</text>
+          <text x="175" y="197" text-anchor="middle" font-size="10.5" fill="currentColor" opacity="0.65">one CPU core, top to bottom</text>
+
+          <text x="175" y="245" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.7">Ceiling: whatever fits in</text>
+          <text x="175" y="259" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.7">this machine's memory</text>
+
+          <!-- RIGHT: cluster -->
+          <text x="515" y="24" text-anchor="middle" font-size="13.5" font-weight="600" fill="currentColor">Cluster — PySpark</text>
+
+          <rect x="370" y="42" width="290" height="44" rx="8" fill="var(--accent-cluster-soft)" stroke="var(--accent-cluster)" stroke-width="1.5"/>
+          <text x="515" y="69" text-anchor="middle" font-size="11.5" fill="currentColor">Driver — plans the job, never touches a row</text>
+
+          <line x1="412" y1="86" x2="412" y2="140" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow)"/>
+          <line x1="515" y1="86" x2="515" y2="140" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow)"/>
+          <line x1="618" y1="86" x2="618" y2="140" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow)"/>
+          <text x="515" y="112" text-anchor="middle" font-size="10" fill="currentColor" opacity="0.6">assigns one task per partition</text>
+
+          <g>
+            <rect x="370" y="140" width="84" height="88" rx="6" fill="var(--accent-cluster-soft)" stroke="var(--accent-cluster)" stroke-width="1.4"/>
+            <text x="412" y="176" text-anchor="middle" font-size="10.5" fill="currentColor">Executor</text>
+            <text x="412" y="192" text-anchor="middle" font-size="9.5" fill="currentColor" opacity="0.7">partition 1</text>
+            <text x="412" y="205" text-anchor="middle" font-size="9.5" fill="currentColor" opacity="0.7">~16.7k rows</text>
+          </g>
+          <g>
+            <rect x="473" y="140" width="84" height="88" rx="6" fill="var(--accent-cluster-soft)" stroke="var(--accent-cluster)" stroke-width="1.4"/>
+            <text x="515" y="176" text-anchor="middle" font-size="10.5" fill="currentColor">Executor</text>
+            <text x="515" y="192" text-anchor="middle" font-size="9.5" fill="currentColor" opacity="0.7">partition 2</text>
+            <text x="515" y="205" text-anchor="middle" font-size="9.5" fill="currentColor" opacity="0.7">~16.7k rows</text>
+          </g>
+          <g>
+            <rect x="576" y="140" width="84" height="88" rx="6" fill="var(--accent-cluster-soft)" stroke="var(--accent-cluster)" stroke-width="1.4"/>
+            <text x="618" y="176" text-anchor="middle" font-size="10.5" fill="currentColor">Executor</text>
+            <text x="618" y="192" text-anchor="middle" font-size="9.5" fill="currentColor" opacity="0.7">partition 3</text>
+            <text x="618" y="205" text-anchor="middle" font-size="9.5" fill="currentColor" opacity="0.7">~16.7k rows</text>
+          </g>
+
+          <text x="515" y="245" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.7">Ceiling: add another machine,</text>
+          <text x="515" y="259" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.7">get another partition</text>
+        </svg>
+      </div>
+      <figcaption>Pandas loads your whole CSV into one process and runs on one core. PySpark cuts the same file into partitions spread across executors that a driver coordinates — the reason it can keep going once a file no longer fits on one machine.</figcaption>
+    </figure>
+  </section>
+
+  <section id="execution">
+    <h2><span class="num">02</span>When your code actually runs</h2>
+    <p class="section-sub">This is the part that trips people up most: PySpark doesn't run each line as you write it.</p>
+
+    <figure>
+      <div class="diagram-wrap">
+        <svg class="diagram" viewBox="0 0 680 280" role="img" aria-label="Pandas executes each line immediately, producing a real column right away. PySpark only records gross_amount, discount_amount and final_amount as a plan, and runs the whole chain at once when an action like show or count is called.">
+          <defs>
+            <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+            </marker>
+          </defs>
+
+          <text x="170" y="24" text-anchor="middle" font-size="13.5" font-weight="600" fill="currentColor">Pandas — eager</text>
+          <text x="515" y="24" text-anchor="middle" font-size="13.5" font-weight="600" fill="currentColor">PySpark — lazy</text>
+
+          <!-- LEFT: eager steps -->
+          <g font-family="'IBM Plex Mono',monospace" font-size="10.5">
+            <rect x="30" y="46" width="185" height="40" rx="6" fill="var(--accent-single-soft)" stroke="var(--accent-single)" stroke-width="1.4"/>
+            <text x="122" y="70" text-anchor="middle" fill="currentColor">gross_amount = ...</text>
+            <line x1="215" y1="66" x2="243" y2="66" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow2)"/>
+            <rect x="243" y="46" width="55" height="40" rx="6" fill="var(--surface)" stroke="currentColor" stroke-width="1.2"/>
+            <text x="270" y="70" text-anchor="middle" fill="currentColor" font-size="9.5">done</text>
+
+            <rect x="30" y="106" width="185" height="40" rx="6" fill="var(--accent-single-soft)" stroke="var(--accent-single)" stroke-width="1.4"/>
+            <text x="122" y="130" text-anchor="middle" fill="currentColor">discount_amount = ...</text>
+            <line x1="215" y1="126" x2="243" y2="126" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow2)"/>
+            <rect x="243" y="106" width="55" height="40" rx="6" fill="var(--surface)" stroke="currentColor" stroke-width="1.2"/>
+            <text x="270" y="130" text-anchor="middle" fill="currentColor" font-size="9.5">done</text>
+
+            <rect x="30" y="166" width="185" height="40" rx="6" fill="var(--accent-single-soft)" stroke="var(--accent-single)" stroke-width="1.4"/>
+            <text x="122" y="190" text-anchor="middle" fill="currentColor">final_amount = ...</text>
+            <line x1="215" y1="186" x2="243" y2="186" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow2)"/>
+            <rect x="243" y="166" width="55" height="40" rx="6" fill="var(--surface)" stroke="currentColor" stroke-width="1.2"/>
+            <text x="270" y="190" text-anchor="middle" fill="currentColor" font-size="9.5">done</text>
+          </g>
+          <text x="170" y="234" text-anchor="middle" font-size="10.5" fill="currentColor" opacity="0.7">each line finishes before the next starts</text>
+
+          <!-- RIGHT: lazy plan -->
+          <g font-family="'IBM Plex Mono',monospace" font-size="10.5">
+            <rect x="370" y="46" width="290" height="36" rx="6" fill="none" stroke="currentColor" stroke-width="1.3" stroke-dasharray="4 3" opacity="0.85"/>
+            <text x="515" y="68" text-anchor="middle" fill="currentColor">gross_amount = ...</text>
+
+            <line x1="515" y1="82" x2="515" y2="100" stroke="currentColor" stroke-width="1.2" marker-end="url(#arrow2)" opacity="0.6"/>
+            <text x="612" y="95" text-anchor="end" font-size="9" fill="currentColor" opacity="0.6">queued, not run</text>
+
+            <rect x="370" y="100" width="290" height="36" rx="6" fill="none" stroke="currentColor" stroke-width="1.3" stroke-dasharray="4 3" opacity="0.85"/>
+            <text x="515" y="122" text-anchor="middle" fill="currentColor">discount_amount = ...</text>
+
+            <line x1="515" y1="136" x2="515" y2="154" stroke="currentColor" stroke-width="1.2" marker-end="url(#arrow2)" opacity="0.6"/>
+
+            <rect x="370" y="154" width="290" height="36" rx="6" fill="none" stroke="currentColor" stroke-width="1.3" stroke-dasharray="4 3" opacity="0.85"/>
+            <text x="515" y="176" text-anchor="middle" fill="currentColor">final_amount = ...</text>
+
+            <line x1="515" y1="190" x2="515" y2="208" stroke="currentColor" stroke-width="1.4" marker-end="url(#arrow2)"/>
+
+            <rect x="370" y="208" width="290" height="38" rx="6" fill="var(--accent-cluster-soft)" stroke="var(--accent-cluster)" stroke-width="1.6"/>
+            <text x="515" y="232" text-anchor="middle" font-weight="600" fill="currentColor">.show() — fires the whole plan</text>
+          </g>
+        </svg>
+      </div>
+      <figcaption>Pandas runs <code>gross_amount</code>, then <code>discount_amount</code>, then <code>final_amount</code> immediately, one after another. PySpark just writes down the plan for all three and waits — nothing executes until an action such as <code>.show()</code>, <code>.count()</code> or <code>.collect()</code> triggers the whole chain across every partition at once.</figcaption>
+    </figure>
+  </section>
+
+  <section id="table">
+    <h2><span class="num">03</span>Five approaches, side by side</h2>
+    <p class="section-sub">Same dimensions, applied to every option — including the two your assignment is actually comparing.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Approach</th><th>Runs on</th><th>Data shape</th><th>Executes</th><th>Scaling ceiling</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tool">NumPy</td>
+            <td>one process, in memory</td>
+            <td>array — numbers only, no column names</td>
+            <td>eager, line by line</td>
+            <td>whatever fits in that machine's RAM</td>
+          </tr>
+          <tr data-row="pandas">
+            <td class="tool">pandas</td>
+            <td>one process, in memory</td>
+            <td>DataFrame — labeled columns, same as your CSV</td>
+            <td>eager, line by line</td>
+            <td>same — whole file must fit in RAM</td>
+          </tr>
+          <tr>
+            <td class="tool">SQL</td>
+            <td>whichever engine runs it — Postgres, Spark SQL, BigQuery…</td>
+            <td>table — rows and named columns</td>
+            <td>declarative — the engine decides the plan</td>
+            <td>inherited entirely from the engine underneath</td>
+          </tr>
+          <tr>
+            <td class="tool">RDD</td>
+            <td>driver + executors, distributed</td>
+            <td>opaque rows — no schema, no column names</td>
+            <td>lazy — waits for an action</td>
+            <td>add executors; you parse and index each row yourself</td>
+          </tr>
+          <tr data-row="pyspark">
+            <td class="tool">PySpark DataFrame</td>
+            <td>driver + executors, distributed</td>
+            <td>DataFrame — labeled columns + schema, like pandas</td>
+            <td>lazy — waits for an action</td>
+            <td>add executors; schema and query optimizer included</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:16px; font-size:14.5px; color:var(--ink-soft);">
+      This is also exactly why your earlier RDD problems felt more manual than this one: an RDD row has no column names, so you'd write <code>float(row[11]) * float(row[12])</code> instead of <code>col("quantity") * col("unit_price")</code>. A DataFrame gives that structure back — whether it's pandas on one machine or PySpark across ten.
+    </p>
+  </section>
+
+  <section id="code">
+    <h2><span class="num">04</span>The same line, five ways</h2>
+    <p class="section-sub"><code>gross_amount = quantity &times; unit_price</code> — written in each approach from the table above.</p>
+
+    <div class="snippets">
+      <div class="snippet">
+        <div class="snippet-head"><span class="name">numpy</span><span class="tag plain">arrays only</span></div>
+        <pre><span class="cm"># quantity / unit_price already pulled out as plain arrays</span>
+<span class="cm"># — no column names, you track the order yourself</span>
+gross_amount = quantity * unit_price</pre>
+      </div>
+
+      <div class="snippet">
+        <div class="snippet-head"><span class="name">pandas</span><span class="tag plain">single machine</span></div>
+        <pre>df = pd.read_csv("sales_100mb.csv")
+df["gross_amount"] = (
+    df["quantity"] * df["unit_price"]
+)
+<span class="cm"># runs immediately, on this line</span></pre>
+      </div>
+
+      <div class="snippet">
+        <div class="snippet-head"><span class="name">sql</span><span class="tag plain">engine-dependent</span></div>
+        <pre>SELECT *,
+  quantity * unit_price AS gross_amount
+FROM sales;
+<span class="cm">-- same query on Postgres or spark.sql()</span></pre>
+      </div>
+
+      <div class="snippet">
+        <div class="snippet-head"><span class="name">rdd</span><span class="tag plain">no schema</span></div>
+        <pre>rows = (sc.textFile("sales_100mb.csv")
+    .filter(lambda r: r != header)
+    .map(lambda r: r.split(",")))
+<span class="cm"># quantity=index 11, unit_price=index 12</span>
+with_gross = rows.map(
+    lambda r: r + [float(r[11]) * float(r[12])]
+)</pre>
+      </div>
+
+      <div class="snippet wide">
+        <div class="snippet-head"><span class="name">pyspark dataframe</span><span class="tag recommended">your assignment</span></div>
+        <pre>df = spark.read.csv("sales_100mb.csv", header=True, inferSchema=True)
+df = df.withColumn("gross_amount", col("quantity") * col("unit_price"))
+<span class="cm"># recorded as a plan — nothing runs until df.show() or df.count()</span></pre>
+      </div>
+    </div>
+  </section>
+
+  <section id="decide">
+    <h2><span class="num">05</span>Which one, when</h2>
+    <ul class="decide">
+      <li><strong>pandas</strong> — data comfortably fits in memory on one machine and will stay that way. Simplest option, no cluster overhead, usually faster for small-to-mid data like this 50k-row file.</li>
+      <li><strong>PySpark DataFrame</strong> — data has outgrown, or might soon outgrow, one machine. Same column-based feel as pandas, but partitioned and lazy so it keeps working past one machine's RAM.</li>
+      <li><strong>RDD</strong> — you need row-level control, or the data has no natural schema. DataFrames have replaced almost every case this used to be needed for.</li>
+      <li><strong>SQL</strong> — you or your team think in queries rather than code. Runs on whatever engine sits underneath, including <code>spark.sql()</code> directly on a PySpark DataFrame.</li>
+      <li><strong>NumPy</strong> — fast numeric math on arrays you already hold in memory, with no need for column names.</li>
+    </ul>
+  </section>
+
+  <section id="honest-answer">
+    <h2><span class="num">06</span>So why does the assignment use PySpark for 50,000 rows?</h2>
+    <div class="callout">
+      <p>Honestly — for this file size, pandas would be faster, with less code and no cluster overhead. That's not a trick; it's the real tradeoff in the table above.</p>
+      <p>The point of practicing it on 50,000 rows is that the syntax doesn't change when the file stops being small. <code>df.withColumn("gross_amount", col("quantity") * col("unit_price"))</code> is exactly what you'd write whether <code>sales_100mb.csv</code> has 50 thousand rows or 50 billion spread across 200 machines. Pandas code doesn't make that jump on its own — it needs a rewrite, or a different library entirely. PySpark is what you practice now so the jump isn't a rewrite later.</p>
+    </div>
+  </section>
+
+  <footer>
+    Reference notes for the PySpark assignment on <code>sales_100mb.csv</code> — pairs with the RDD practice set and the DataFrame tasks (gross/discount/final amount, column renames).
+  </footer>
+
+</div>
