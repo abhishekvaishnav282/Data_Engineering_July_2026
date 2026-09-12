@@ -1,0 +1,337 @@
+{
+    "results": [
+        {
+            "user": {
+                "gender": "female",
+                "name": {
+                    "title": "mrs",
+                    "first": "marine",
+                    "last": "le gall"
+                },
+                "location": {
+                    "street": "5757 rue des cuirassiers",
+                    "city": "tours",
+                    "state": "ardennes",
+                    "zip": 38539
+                },
+                "email": "marine.le gall@example.com",
+                "username": "beautifulswan400",
+                "password": "6669",
+                "salt": "GOVCIHCk",
+                "md5": "d2a6faf83038c49b2181947e8ce9cc63",
+                "sha1": "b42eef72b48002f22121ceeb5008d623d0d91ffc",
+                "sha256": "fd3530df4f64452a3e6e6bcbaad29185700388721b2ccc028cf65d0ff78d459c",
+                "registered": 1388540224,
+                "dob": 945014544,
+                "phone": "04-15-76-88-13",
+                "cell": "06-70-70-89-12",
+                "INSEE": "2991299130163 45",
+                "picture": {
+                    "large": "https://randomuser.me/api/portraits/women/79.jpg",
+                    "medium": "https://randomuser.me/api/portraits/med/women/79.jpg",
+                    "thumbnail": "https://randomuser.me/api/portraits/thumb/women/79.jpg"
+                }
+            }
+        },
+        {
+            "user": {
+                "gender": "female",
+                "name": {
+                    "title": "ms",
+                    "first": "agathe",
+                    "last": "durand"
+                },
+                "location": {
+                    "street": "7741 rue saint-georges",
+                    "city": "le mans",
+                    "state": "savoie",
+                    "zip": 43105
+                },
+                "email": "agathe.durand@example.com",
+                "username": "greengorilla474",
+                "password": "garrett",
+                "salt": "1qhNEkfy",
+                "md5": "a2cdcf7ad3cc1b6582e92aed414c5ed3",
+                "sha1": "7ad5c50681f2294b362a0bc33be2928379a2b53c",
+                "sha256": "918c9567faa2d5c974db075dd7bb518523041aa1eb33004d0974946739b9dc07",
+                "registered": 1072489802,
+                "dob": 1248125902,
+                "phone": "01-56-93-90-03",
+                "cell": "06-65-31-76-79",
+                "INSEE": "2090778336643 75",
+                "picture": {
+                    "large": "https://randomuser.me/api/portraits/women/34.jpg",
+                    "medium": "https://randomuser.me/api/portraits/med/women/34.jpg",
+                    "thumbnail": "https://randomuser.me/api/portraits/thumb/women/34.jpg"
+                }
+            }
+        },
+        {
+            "user": {
+                "gender": "male",
+                "name": {
+                    "title": "mr",
+                    "first": "antonin",
+                    "last": "leroux"
+                },
+                "location": {
+                    "street": "7968 rue de l'abbaye",
+                    "city": "champigny-sur-marne",
+                    "state": "corrèze",
+                    "zip": 48652
+                },
+                "email": "antonin.leroux@example.com",
+                "username": "orangefish234",
+                "password": "shao",
+                "salt": "A08TLlOC",
+                "md5": "d0e30651b7760a64c5659951e12b6022",
+                "sha1": "b72da192dee2898c242815100b421ab005f23114",
+                "sha256": "26afdd5529449c1bc4ef16135a7d56cb57fd8ccbd482f2c58c23e2ad5778b304",
+                "registered": 1151006492,
+                "dob": 412227905,
+                "phone": "01-90-10-44-20",
+                "cell": "06-50-04-92-01",
+                "INSEE": "1830143403540 32",
+                "picture": {
+                    "large": "https://randomuser.me/api/portraits/men/3.jpg",
+                    "medium": "https://randomuser.me/api/portraits/med/men/3.jpg",
+                    "thumbnail": "https://randomuser.me/api/portraits/thumb/men/3.jpg"
+                }
+            }
+        },
+        {
+            "user": {
+                "gender": "female",
+                "name": {
+                    "title": "miss",
+                    "first": "lison",
+                    "last": "giraud"
+                },
+                "location": {
+                    "street": "9301 rue du stade",
+                    "city": "fort-de-france",
+                    "state": "loire",
+                    "zip": 64544
+                },
+                "email": "lison.giraud@example.com",
+                "username": "heavywolf166",
+                "password": "corrado",
+                "salt": "7iGGPcx0",
+                "md5": "d51acdc266a314c7fa999b7a037b435f",
+                "sha1": "4abf6c5a819d250155da1bba464469188a8110f2",
+                "sha256": "46487fbc93e56e6bce07b8186d1f0f909dc1689c2bb0f34ee2306275c9db0359",
+                "registered": 1326279272,
+                "dob": 395495250,
+                "phone": "03-99-85-25-28",
+                "cell": "06-33-37-12-49",
+                "INSEE": "2820755279874 11",
+                "picture": {
+                    "large": "https://randomuser.me/api/portraits/women/2.jpg",
+                    "medium": "https://randomuser.me/api/portraits/med/women/2.jpg",
+                    "thumbnail": "https://randomuser.me/api/portraits/thumb/women/2.jpg"
+                }
+            }
+        },
+        {
+            "user": {
+                "gender": "female",
+                "name": {
+                    "title": "ms",
+                    "first": "apolline",
+                    "last": "roussel"
+                },
+                "location": {
+                    "street": "6673 rue principale",
+                    "city": "lyon",
+                    "state": "doubs",
+                    "zip": 67893
+                },
+                "email": "apolline.roussel@example.com",
+                "username": "purpledog805",
+                "password": "fugazi",
+                "salt": "9IhTLsZh",
+                "md5": "e071b85157e1632d4de90d5f3637f4b1",
+                "sha1": "b9fb393558dc9ccdfd8fe8b8bb2e98c0609cedcd",
+                "sha256": "56c53bdf68df04f33e58bb36b8e3d6ae0786c0db1714e2c86429cdff36c56e4a",
+                "registered": 1233338344,
+                "dob": 959317119,
+                "phone": "03-32-22-71-10",
+                "cell": "06-47-50-99-83",
+                "INSEE": "2000532091783 70",
+                "picture": {
+                    "large": "https://randomuser.me/api/portraits/women/69.jpg",
+                    "medium": "https://randomuser.me/api/portraits/med/women/69.jpg",
+                    "thumbnail": "https://randomuser.me/api/portraits/thumb/women/69.jpg"
+                }
+            }
+        },
+        {
+            "user": {
+                "gender": "male",
+                "name": {
+                    "title": "mr",
+                    "first": "tom",
+                    "last": "guillot"
+                },
+                "location": {
+                    "street": "9498 rue principale",
+                    "city": "villeurbanne",
+                    "state": "gers",
+                    "zip": 33638
+                },
+                "email": "tom.guillot@example.com",
+                "username": "beautifulrabbit538",
+                "password": "mailman",
+                "salt": "VpRz7oOr",
+                "md5": "3174a74a8024b34a62132acaa2383ed8",
+                "sha1": "f4950207fec2e5586f2d449b8f2809e59a73b6b3",
+                "sha256": "ba63927674786fc43643c45086217eef8fac1f1247671cc16bd19c677a5bbed2",
+                "registered": 1093656385,
+                "dob": 185038730,
+                "phone": "02-97-39-53-57",
+                "cell": "06-18-67-93-92",
+                "INSEE": "1751199883378 23",
+                "picture": {
+                    "large": "https://randomuser.me/api/portraits/men/85.jpg",
+                    "medium": "https://randomuser.me/api/portraits/med/men/85.jpg",
+                    "thumbnail": "https://randomuser.me/api/portraits/thumb/men/85.jpg"
+                }
+            }
+        },
+        {
+            "user": {
+                "gender": "female",
+                "name": {
+                    "title": "miss",
+                    "first": "victoria",
+                    "last": "lefevre"
+                },
+                "location": {
+                    "street": "1616 rue bony",
+                    "city": "dijon",
+                    "state": "deux-sèvres",
+                    "zip": 62071
+                },
+                "email": "victoria.lefevre@example.com",
+                "username": "orangemouse782",
+                "password": "superman",
+                "salt": "Medk57pZ",
+                "md5": "463f044c4b23c4555ee4cf7967d8c2ef",
+                "sha1": "2db5542d5e2e35af4c124fd68ec231c3c594b5d7",
+                "sha256": "9f0cd87b007e0eac4ad39a19d3c1d4c39c86a80eff46c3569dcf60477b150ba2",
+                "registered": 1062640748,
+                "dob": 454450144,
+                "phone": "05-13-09-40-06",
+                "cell": "06-25-79-27-01",
+                "INSEE": "2840552013254 64",
+                "picture": {
+                    "large": "https://randomuser.me/api/portraits/women/43.jpg",
+                    "medium": "https://randomuser.me/api/portraits/med/women/43.jpg",
+                    "thumbnail": "https://randomuser.me/api/portraits/thumb/women/43.jpg"
+                }
+            }
+        },
+        {
+            "user": {
+                "gender": "female",
+                "name": {
+                    "title": "ms",
+                    "first": "eva",
+                    "last": "moreau"
+                },
+                "location": {
+                    "street": "2860 avenue debourg",
+                    "city": "pau",
+                    "state": "gironde",
+                    "zip": 63503
+                },
+                "email": "eva.moreau@example.com",
+                "username": "silverfrog846",
+                "password": "cunt",
+                "salt": "INVZryNl",
+                "md5": "0b9422e9fa79297a287315305625a1ca",
+                "sha1": "b0d1c3c13027ce38a841a4a6fbfd0a022e5093ee",
+                "sha256": "151798c91ebbf96448dd437a08d37da95f28024f01b7c191c79a6c17e20087a4",
+                "registered": 1136434898,
+                "dob": 1320338583,
+                "phone": "04-93-05-44-75",
+                "cell": "06-99-51-12-75",
+                "INSEE": "2111146126963 76",
+                "picture": {
+                    "large": "https://randomuser.me/api/portraits/women/66.jpg",
+                    "medium": "https://randomuser.me/api/portraits/med/women/66.jpg",
+                    "thumbnail": "https://randomuser.me/api/portraits/thumb/women/66.jpg"
+                }
+            }
+        },
+        {
+            "user": {
+                "gender": "male",
+                "name": {
+                    "title": "mr",
+                    "first": "téo",
+                    "last": "arnaud"
+                },
+                "location": {
+                    "street": "9173 avenue de l'abbé-roussel",
+                    "city": "tourcoing",
+                    "state": "hérault",
+                    "zip": 63244
+                },
+                "email": "téo.arnaud@example.com",
+                "username": "silverduck842",
+                "password": "server",
+                "salt": "CdDY3mPO",
+                "md5": "e862b4e17d03dd2496fed697ba3da1ce",
+                "sha1": "59e733a264bf13ea388e176e7d8e697dde801566",
+                "sha256": "91a8db3344b4271d8b1bdb0ec7e9d8caa6ac9a5274d72809b6f1efd6372b65b3",
+                "registered": 1090161421,
+                "dob": 1309292668,
+                "phone": "03-14-31-52-79",
+                "cell": "06-99-13-86-61",
+                "INSEE": "1110667221267 85",
+                "picture": {
+                    "large": "https://randomuser.me/api/portraits/men/46.jpg",
+                    "medium": "https://randomuser.me/api/portraits/med/men/46.jpg",
+                    "thumbnail": "https://randomuser.me/api/portraits/thumb/men/46.jpg"
+                }
+            }
+        },
+        {
+            "user": {
+                "gender": "female",
+                "name": {
+                    "title": "miss",
+                    "first": "enora",
+                    "last": "picard"
+                },
+                "location": {
+                    "street": "5662 rue baraban",
+                    "city": "dunkerque",
+                    "state": "ardennes",
+                    "zip": 70115
+                },
+                "email": "enora.picard@example.com",
+                "username": "purpletiger160",
+                "password": "candle",
+                "salt": "WISBlEr1",
+                "md5": "bd78ee227e1aac47d7ce7cedff090a3e",
+                "sha1": "d561d9a6123b9856768e587543ccb48a74739d48",
+                "sha256": "ab9ba399ad65c1d9a5223789beb5278c1286e131f4b8956ad63d717210b4d5ca",
+                "registered": 1180872572,
+                "dob": 378490014,
+                "phone": "02-62-56-90-89",
+                "cell": "06-36-16-75-56",
+                "INSEE": "2811233445808 74",
+                "picture": {
+                    "large": "https://randomuser.me/api/portraits/women/56.jpg",
+                    "medium": "https://randomuser.me/api/portraits/med/women/56.jpg",
+                    "thumbnail": "https://randomuser.me/api/portraits/thumb/women/56.jpg"
+                }
+            }
+        }
+    ],
+    "nationality": "FR",
+    "seed": "ff33a37671ca6a5207",
+    "version": "0.8"
+}
