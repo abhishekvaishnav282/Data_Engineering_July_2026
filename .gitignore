@@ -27,3 +27,4 @@ __MACOSX/
 # --- Large datasets (download separately, see each project's README) ---
 Python/Home-Credit-Dashboard/data/*.csv
 *.zip
+!DataBricks/.local.zip
